@@ -1,11 +1,11 @@
 {
-  "name": "Spa Studio 9",
-  "short_name": "SpaStudio9",
+  "name": "Kalijotta",
+  "short_name": "Kalijotta",
   "start_url": "/?redirect=true",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
-  "description": "Install Spa Studio 9 app for a better experience.",
+  "description": "Install Kalijotta app for a better experience.",
   "icons": [
     {
       "src": "https://images.vexels.com/media/users/3/142789/isolated/preview/2bfb04ad814c4995f0c537c68db5cd0b-multicolor-swirls-circle-logo.png",
