@@ -47,15 +47,9 @@
     button:hover {
       background: #006f44;
     }
-    .splash {
-      display: none;
-      height: 100vh;
-      background: white;
-      align-items: center;
-      justify-content: center;
-    }
-    .splash img {
-      width: 120px;
+    button.installed {
+      background: #555555;
+      cursor: default;
     }
   </style>
 </head>
@@ -66,44 +60,39 @@
     <img class="logo" src="https://images.vexels.com/media/users/3/142789/isolated/preview/2bfb04ad814c4995f0c537c68db5cd0b-multicolor-swirls-circle-logo.png" alt="Logo" />
     <h2>Kalijotta</h2>
     <p>Install this app on your device for a better experience.</p>
-    <button id="installBtn">Install</button>
+    <button id="installBtn" style="display:none;">Install</button>
   </div>
-</div>
-
-<div class="splash" id="splashScreen">
-  <img src="https://images.vexels.com/media/users/3/142789/isolated/preview/2bfb04ad814c4995f0c537c68db5cd0b-multicolor-swirls-circle-logo.png" alt="Splash Logo" />
 </div>
 
 <script>
   let deferredPrompt;
+  const installBtn = document.getElementById('installBtn');
 
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    document.getElementById('installBtn').style.display = 'inline-block';
-
-    document.getElementById('installBtn').addEventListener('click', () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            document.body.innerHTML = '';
-            document.getElementById('splashScreen').style.display = 'flex';
-            setTimeout(() => {
-              window.location.href = "/?redirect=true";
-            }, 1000);
-          }
-        });
-      }
-    });
+    installBtn.style.display = 'inline-block';
   });
 
-  if (window.location.search.includes("redirect=true")) {
-    document.body.innerHTML = '';
-    document.getElementById('splashScreen').style.display = 'flex';
-    setTimeout(() => {
-      window.location.href = "https://kalijotta.in";
-    }, 1000);
+  installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    installBtn.textContent = 'Installing...';
+    deferredPrompt.prompt();
+    const choiceResult = await deferredPrompt.userChoice;
+    if (choiceResult.outcome === 'accepted') {
+      installBtn.textContent = 'Installed';
+      installBtn.classList.add('installed');
+      // Redirect to /?redirect after install accepted
+      window.location.href = '/?redirect';
+    } else {
+      installBtn.textContent = 'Install';
+    }
+    deferredPrompt = null;
+  });
+
+  // On page load, redirect if URL contains /?redirect
+  if (window.location.search.includes('redirect')) {
+    window.location.href = 'https://kalijotta.in';
   }
 
   if ('serviceWorker' in navigator) {
