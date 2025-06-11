@@ -8,12 +8,12 @@
   "description": "Install Spa Studio 9 app for a better experience.",
   "icons": [
     {
-      "src": "https://kalijotta.in/temp_img/kaliJotta_logo.png",
+      "src": "https://images.vexels.com/media/users/3/142789/isolated/preview/2bfb04ad814c4995f0c537c68db5cd0b-multicolor-swirls-circle-logo.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://kalijotta.in/temp_img/kaliJotta_logo.png",
+      "src": "https://images.vexels.com/media/users/3/142789/isolated/preview/2bfb04ad814c4995f0c537c68db5cd0b-multicolor-swirls-circle-logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }
